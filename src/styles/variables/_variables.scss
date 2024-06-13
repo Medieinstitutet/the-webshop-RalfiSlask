@@ -1,0 +1,7 @@
+$development: true;
+
+div {
+  @if $development {
+    border: 1px solid hotpink;
+  }
+}
