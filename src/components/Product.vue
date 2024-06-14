@@ -1,11 +1,21 @@
 <script setup lang="ts">
 import type { IMovieProduct } from '@/utils/types/types';
+import { useWebshopStore } from '@/stores/webshopStore';
+import { storeToRefs } from 'pinia';
+
+const store = useWebshopStore();
+
+const { categories } = storeToRefs(store)
+
+const { addProductToCart } = store;
 
 interface IProductProps {
   productInfo: IMovieProduct;
 }
 
 defineProps<IProductProps>();
+
+
 </script>
 
 <template>
@@ -15,12 +25,14 @@ defineProps<IProductProps>();
       <p>${{ productInfo.price }}</p>
     </div>
     <div class="w-full h-[200px] md:h-[300px]">
-      <img class="w-full h-full object-cover" :src="productInfo.imageUrl"></img>
+      <img class="w-full h-full object-cover" loading="lazy" :src="productInfo.imageUrl" :alt="productInfo.description"></img>
+    </div>
+    <div>
+      <p>Year: {{ productInfo.year }}</p>
     </div>
     <div class="px-2 overflow-y-auto h-[150px]">
       <p>{{  productInfo.description }}</p>
     </div>
-    
+    <button @click="addProductToCart(productInfo.id)">Buy</button>
   </div>
-
 </template>
