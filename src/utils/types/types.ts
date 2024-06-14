@@ -5,11 +5,16 @@ export interface IMovieProduct {
   imageUrl: string;
   name: string;
   price: number;
-  productCategory: ICategory[];
+  productCategory: IProductCategory[];
   year: number;
 }
 
-export interface ICategory {
+export interface IProductCategory {
   categoryId: number;
   category: null;
+}
+
+export interface ICategory {
+  id: number;
+  name: string;
 }
