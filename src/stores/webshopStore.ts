@@ -19,6 +19,13 @@ export const useWebshopStore = defineStore('webshop', {
     filteredProducts: [],
     cartProducts: [{ title: 'hej', cartId: 1, price: 200, imgUrl: '', quantity: 1 }],
   }),
+  getters: {
+    totalPrice: state => {
+      return state.cartProducts.reduce((prevV, nextV) => {
+        return prevV + nextV.price * nextV.quantity;
+      }, 0);
+    },
+  },
   actions: {
     async fetchProducts() {
       try {
@@ -62,6 +69,19 @@ export const useWebshopStore = defineStore('webshop', {
     },
     removeProductFromCart(productId: number): void {
       this.cartProducts = this.cartProducts.filter(product => product.cartId !== productId);
+    },
+    increaseCartProduct(productId: number): void {
+      const foundProduct = this.cartProducts.find(product => product.cartId === productId);
+      if (foundProduct) {
+        foundProduct.quantity++;
+      }
+    },
+    decreaseCartProduct(productId: number): void {
+      const foundProduct = this.cartProducts.find(product => product.cartId === productId);
+      if (!foundProduct) return;
+      if (foundProduct.quantity > 1) {
+        foundProduct.quantity -= 1;
+      }
     },
   },
 });
