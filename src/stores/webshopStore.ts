@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import type { IMovieProduct, ICategory, IPaymentMethods } from '@/utils/types/types';
+import type { IMovieProduct, ICategory, IPaymentMethods, IModals } from '@/utils/types/types';
 import { CartProduct } from '@/models/CartProduct';
 import lodash from 'lodash';
 import axios from 'axios';
@@ -19,10 +19,20 @@ export const useWebshopStore = defineStore('webshop', () => {
   const searchText = ref<string>('');
   const searchResults = ref<number[]>([]);
   const paymentMethods = ref<IPaymentMethods>({ invoice: true, paypal: false });
-  const isCartOpen = ref<boolean>(false);
+  const modalStates = ref<IModals>({ login: false, create: false, cart: false });
 
   const totalPrice = computed(() => {
     return cartProducts.value.reduce((prevV, nextV) => prevV + nextV.price * nextV.quantity, 0);
+  });
+
+  const orderProducts = computed(() => {
+    return cartProducts.value.map(product => {
+      return { productId: product.cartId, amount: product.quantity };
+    });
+  });
+
+  const hasActiveModal = computed(() => {
+    return Object.values(modalStates.value).some(state => state);
   });
 
   const visibleProducts = computed(() => {
@@ -44,16 +54,14 @@ export const useWebshopStore = defineStore('webshop', () => {
   const postOrders = async () => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, {
-        createdBy: 'Hejsa',
+        createdBy: 'Test',
         created: new Date().toISOString(),
         paymentMethod: paymentMethods.value.invoice ? 'invoice' : 'paypal',
-        status: 0,
         totalPrice: totalPrice.value,
-        orderRows: [{ productId: 76, amount: 1 }],
+        /* orderRows: [{ productId: 75, amount: 1 }],  */ // TEST
       });
 
       const orderData = response.data;
-
       console.log(orderData);
     } catch (err) {
       console.log(err, 'error');
@@ -158,8 +166,9 @@ export const useWebshopStore = defineStore('webshop', () => {
     paymentMethods.value[key] = true;
   };
 
-  const changeStateOfCartSidebar = (state: boolean) => {
-    isCartOpen.value = state;
+  const changeStateOfModal = (key: keyof IModals, state: boolean) => {
+    modalStates.value[key] = state;
+    console.log(modalStates.value);
   };
 
   return {
@@ -172,7 +181,8 @@ export const useWebshopStore = defineStore('webshop', () => {
     totalPrice,
     visibleProducts,
     paymentMethods,
-    isCartOpen,
+    modalStates,
+    hasActiveModal,
     fetchProducts,
     fetchCategories,
     fetchBySearch,
@@ -185,6 +195,6 @@ export const useWebshopStore = defineStore('webshop', () => {
     increaseCartProduct,
     decreaseCartProduct,
     changePaymentMethod,
-    changeStateOfCartSidebar,
+    changeStateOfModal,
   };
 });
