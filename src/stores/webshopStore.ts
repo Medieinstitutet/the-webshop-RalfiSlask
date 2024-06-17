@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import type { IMovieProduct, ICategory, IPaymentMethods, IModals } from '@/utils/types/types';
+import type { IMovieProduct, ICategory, IPaymentMethods, IModals, IInputs } from '@/utils/types/types';
 import { CartProduct } from '@/models/CartProduct';
+import { textOnlyRegx } from '@/utils/regEx/regEx';
+import { emptyInputs } from '@/models/FormInputs';
 import lodash from 'lodash';
 import axios from 'axios';
 
@@ -20,6 +22,19 @@ export const useWebshopStore = defineStore('webshop', () => {
   const searchResults = ref<number[]>([]);
   const paymentMethods = ref<IPaymentMethods>({ invoice: true, paypal: false });
   const modalStates = ref<IModals>({ login: false, create: false, cart: false });
+  const inputs = ref<IInputs>(emptyInputs);
+  const checkutFormError = ref<boolean>(false);
+
+  const changeInput = (e: Event, key: keyof IInputs) => {
+    const target = e.target as HTMLInputElement;
+    inputs.value[key] = target.value;
+    checkutFormError.value = false;
+  };
+
+  // Only test for name input, only required for this excersise
+  const isCheckoutFormValid = computed(() => {
+    return inputs.value.name.trim().length > 0 ? textOnlyRegx.test(inputs.value.name) : false;
+  });
 
   const totalPrice = computed(() => {
     return cartProducts.value.reduce((prevV, nextV) => prevV + nextV.price * nextV.quantity, 0);
@@ -54,11 +69,11 @@ export const useWebshopStore = defineStore('webshop', () => {
   const postOrders = async () => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, {
-        createdBy: 'Test',
+        createdBy: inputs.value.name,
         created: new Date().toISOString(),
         paymentMethod: paymentMethods.value.invoice ? 'invoice' : 'paypal',
         totalPrice: totalPrice.value,
-        /* orderRows: [{ productId: 75, amount: 1 }],  */ // TEST
+        orderRows: [], // TEST
       });
 
       const orderData = response.data;
@@ -168,7 +183,11 @@ export const useWebshopStore = defineStore('webshop', () => {
 
   const changeStateOfModal = (key: keyof IModals, state: boolean) => {
     modalStates.value[key] = state;
-    console.log(modalStates.value);
+  };
+
+  const resetCheckoutForm = () => {
+    inputs.value = emptyInputs;
+    paymentMethods.value = { invoice: true, paypal: false };
   };
 
   return {
@@ -183,6 +202,9 @@ export const useWebshopStore = defineStore('webshop', () => {
     paymentMethods,
     modalStates,
     hasActiveModal,
+    isCheckoutFormValid,
+    checkutFormError,
+    inputs,
     fetchProducts,
     fetchCategories,
     fetchBySearch,
@@ -196,5 +218,7 @@ export const useWebshopStore = defineStore('webshop', () => {
     decreaseCartProduct,
     changePaymentMethod,
     changeStateOfModal,
+    changeInput,
+    resetCheckoutForm,
   };
 });
