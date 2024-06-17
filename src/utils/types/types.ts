@@ -9,6 +9,12 @@ export interface IMovieProduct {
   year: number;
 }
 
+export interface IModals {
+  login: boolean;
+  create: boolean;
+  cart: boolean;
+}
+
 export interface IProductCategory {
   categoryId: number;
   category: null;
@@ -17,4 +23,9 @@ export interface IProductCategory {
 export interface ICategory {
   id: number;
   name: string;
+}
+
+export interface IPaymentMethods {
+  invoice: boolean;
+  paypal: boolean;
 }
