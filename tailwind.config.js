@@ -4,11 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        greenColor: '#38CB89',
-        grayColor: '#F3F5F7',
-        blackColor: '#141718',
-        grayColor: '#807E7E',
-        greenHover: '#5FE3A9',
+        primaryColor: '#FCFCFC',
+        secondaryColor: '#F2F5FF',
+        blackColor: '#333',
+        grayColor: '#666',
+        blueColor: '#03344F',
+        blueHover: '#065E7A',
       },
     },
   },
