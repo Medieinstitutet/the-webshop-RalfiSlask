@@ -1,0 +1,19 @@
+<script setup lang="ts">
+import Order from './Order.vue';
+import { useWebshopStore } from '@/stores/webshopStore';
+import { storeToRefs } from 'pinia';
+import OrderHeadings from './OrderHeadings.vue';
+const store = useWebshopStore();
+
+const { adminOrders } = storeToRefs(store);
+console.log(adminOrders.value);
+</script>
+
+<template>
+  <section class="mt-[80px] w-full grid grid-cols-12 gap-10">
+    <OrderHeadings />
+    <div class="col-span-12 flex flex-col gap-4">
+      <Order v-for="order in adminOrders" :key="order.id" :orderInfo="order" />
+    </div>
+  </section>
+</template>
