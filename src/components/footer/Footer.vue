@@ -3,8 +3,8 @@ import FooterInfo from './FooterInfo.vue';
 </script>
 
 <template>
-  <footer class="w-full flex flex-col items-center pt-12 pb-8 px-[5%] bg-blackColor text-white absolute bottom-0">
-    <div class="flex items-center justify-between w-full">
+  <footer class="w-full flex flex-col items-center pt-12 pb-8 gap-10 px-[5%] bg-blueColor text-white absolute bottom-0">
+    <div class="flex justify-between w-full">
       <div>Matthias Webshop</div>
       <FooterInfo />
     </div>
