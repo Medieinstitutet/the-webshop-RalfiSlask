@@ -16,7 +16,7 @@ const props = defineProps<ICategoryProps>();
 
 <template>
   <button
-    :class="`${selectedCategoryId === categoryId ? 'bg-black' : 'bg-grayColor'} category`"
+    :class="`${selectedCategoryId === categoryId ? 'bg-blackColor' : 'bg-grayColor'} category`"
     @click="setSelectedCategory(props.categoryId)"
   >
     {{ text }}

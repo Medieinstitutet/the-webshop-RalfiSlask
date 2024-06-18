@@ -16,7 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="max-w-[1400px] flex flex-col items-center gap-14 py-10 pb-[400px]">
+  <section class="max-w-[1400px] flex flex-col items-center gap-14 py-20 pb-[400px]">
     <h2 class="text-3xl">Products</h2>
     <div class="flex flex-col gap-6">
       <div class="w-full flex flex-col sm:flex-row flex-wrap gap-4 items-center justify-between px-4">
@@ -24,8 +24,7 @@ onMounted(() => {
       </div>
       <SearchInput />
     </div>
-
-    <ul class="flex flex-wrap gap-4 justify-center">
+    <ul class="flex flex-wrap gap-x-4 gap-y-10 justify-center">
       <Product v-for="product in visibleProducts" :key="product.id" :productInfo="product" />
     </ul>
   </section>

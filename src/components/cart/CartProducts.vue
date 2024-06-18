@@ -12,7 +12,7 @@ const { cartProducts } = storeToRefs(store);
 <template>
   <CartEmpty v-if="cartProducts.length === 0" />
   <div class="flex flex-col gap-4 items-center" v-else>
-    <CartProduct v-for="cartProduct in cartProducts" :key="cartProduct.cartId" :cartProductInfo="cartProduct" />
+    <CartProduct v-for="cartProduct in cartProducts" :key="cartProduct.productId" :cartProductInfo="cartProduct" />
     <CheckoutButton />
   </div>
 </template>

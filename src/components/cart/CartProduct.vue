@@ -23,7 +23,7 @@ defineProps<ICartProductProps>();
         <div class="w-[100px]">
           <img :src="cartProductInfo.imgUrl" :alt="cartProductInfo.title" width="100px" height="100px" loading="lazy" />
         </div>
-        <RemoveCartProductButton @remove-product="removeProductFromCart" :productId="cartProductInfo.cartId" />
+        <RemoveCartProductButton @remove-product="removeProductFromCart" :productId="cartProductInfo.productId" />
       </div>
       <div>
         <p>{{ cartProductInfo.title }}</p>
@@ -31,9 +31,9 @@ defineProps<ICartProductProps>();
       </div>
     </div>
     <div class="flex items-center gap-2">
-      <DecreaseProductButton :id="cartProductInfo.cartId" />
-      <p>{{ cartProductInfo.quantity }}</p>
-      <IncreaseProductButton :id="cartProductInfo.cartId" />
+      <DecreaseProductButton :id="cartProductInfo.productId" />
+      <p>{{ cartProductInfo.amount }}</p>
+      <IncreaseProductButton :id="cartProductInfo.productId" />
     </div>
   </div>
 </template>

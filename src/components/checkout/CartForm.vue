@@ -1,6 +1,6 @@
 <script setup>
 import FormSection from './FormSection.vue';
-import { formInputs } from '@/models/FormInputs';
+import { formInputs } from '@/models/formInputs';
 </script>
 
 <template>
