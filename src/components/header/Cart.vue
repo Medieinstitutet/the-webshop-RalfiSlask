@@ -10,7 +10,10 @@ const { cartProducts } = storeToRefs(store);
 <template>
   <button @click="changeStateOfModal('cart', true)" class="relative">
     <span>To Cashier</span>
-    <span class="flex items-center gap-2 bg-grayColor w-6 justify-center rounded-full absolute right-0 top-[-20px]">
+    <span
+      v-if="cartProducts.length > 0"
+      class="flex items-center gap-2 bg-grayColor w-6 justify-center rounded-full absolute right-0 top-[-20px]"
+    >
       <p>{{ cartProducts.length }}</p>
     </span>
   </button>

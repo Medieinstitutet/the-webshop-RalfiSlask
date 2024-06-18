@@ -7,5 +7,5 @@ defineProps<ILargeHeadingProps>();
 </script>
 
 <template>
-  <h2 class="text-3xl uppercase text-medium">{{ text }}</h2>
+  <h2 class="text-3xl uppercase font-medium">{{ text }}</h2>
 </template>
