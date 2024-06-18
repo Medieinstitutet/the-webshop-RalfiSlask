@@ -1,11 +1,27 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import Header from './components/Header.vue';
+import { storeToRefs } from 'pinia';
+import { useWebshopStore } from './stores/webshopStore';
+import Header from './components/header/Header.vue';
+import Footer from './components/footer/Footer.vue';
+import Lightbox from './components/shared/Lightbox.vue';
+import CartSidebar from './components/cart/CartSidebar.vue';
+
+const store = useWebshopStore();
+const { modalStates, hasActiveModal } = storeToRefs(store);
 </script>
 
 <template>
-  <Header />
-  <RouterView />
+  <div class="min-h-screen relative pb-[400px]">
+    <Header />
+    <main class="w-full flex flex-col items-center">
+      <RouterView />
+    </main>
+
+    <Footer />
+    <CartSidebar v-if="modalStates.cart" />
+    <Lightbox v-if="hasActiveModal" />
+  </div>
 </template>
 
 <style scoped></style>
