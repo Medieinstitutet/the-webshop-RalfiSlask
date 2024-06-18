@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
-import { ref, computed } from 'vue';
-import type { IMovieProduct, ICategory, IPaymentMethods, IModals, IInputs } from '@/utils/types/types';
+import { ref, computed, watch } from 'vue';
+import type { IMovieProduct, ICategory, IPaymentMethods, IModals, IInputs, IOrder } from '@/utils/types/types';
 import { CartProduct } from '@/models/CartProduct';
 import { textOnlyRegx } from '@/utils/regEx/regEx';
-import { emptyInputs } from '@/models/FormInputs';
+import { emptyInputs } from '@/models/formInputs';
 import lodash from 'lodash';
 import axios from 'axios';
 
@@ -17,13 +17,29 @@ export const useWebshopStore = defineStore('webshop', () => {
   const products = ref<IMovieProduct[]>([]);
   const categories = ref<ICategory[]>([]);
   const selectedCategoryId = ref<number>(1); // All
-  const cartProducts = ref<CartProduct[]>([{ title: 'hej', cartId: 1, price: 200, imgUrl: '', quantity: 1 }]);
+  const cartProducts = ref<CartProduct[]>(JSON.parse(localStorage.getItem('cart') || '[]') as CartProduct[]);
   const searchText = ref<string>('');
   const searchResults = ref<number[]>([]);
   const paymentMethods = ref<IPaymentMethods>({ invoice: true, paypal: false });
   const modalStates = ref<IModals>({ login: false, create: false, cart: false });
   const inputs = ref<IInputs>(emptyInputs);
   const checkutFormError = ref<boolean>(false);
+  const adminOrders = ref<IOrder[]>([]);
+  const companyId = ref<number>(34567);
+  const isOrderPayed = ref<boolean>(false);
+
+  watch(
+    cartProducts,
+    newCartProducts => {
+      localStorage.setItem('cart', JSON.stringify(newCartProducts));
+    },
+    { deep: true }
+  );
+
+  const toggleStateOfOrder = () => {
+    isOrderPayed.value = !isOrderPayed.value;
+    console.log(isOrderPayed.value);
+  };
 
   const changeInput = (e: Event, key: keyof IInputs) => {
     const target = e.target as HTMLInputElement;
@@ -31,18 +47,18 @@ export const useWebshopStore = defineStore('webshop', () => {
     checkutFormError.value = false;
   };
 
-  // Only test for name input, only required for this excersise
+  // Only test for name input, only required for this excercise
   const isCheckoutFormValid = computed(() => {
     return inputs.value.name.trim().length > 0 ? textOnlyRegx.test(inputs.value.name) : false;
   });
 
   const totalPrice = computed(() => {
-    return cartProducts.value.reduce((prevV, nextV) => prevV + nextV.price * nextV.quantity, 0);
+    return cartProducts.value.reduce((prevV, nextV) => prevV + nextV.price * nextV.amount, 0);
   });
 
   const orderProducts = computed(() => {
     return cartProducts.value.map(product => {
-      return { productId: product.cartId, amount: product.quantity };
+      return { productId: product.productId, amount: product.amount };
     });
   });
 
@@ -69,25 +85,17 @@ export const useWebshopStore = defineStore('webshop', () => {
   const postOrders = async () => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, {
+        companyId: 34567,
         createdBy: inputs.value.name,
         created: new Date().toISOString(),
         paymentMethod: paymentMethods.value.invoice ? 'invoice' : 'paypal',
         totalPrice: totalPrice.value,
-        orderRows: [], // TEST
+        orderRows: orderProducts.value, // TEST
       });
 
-      const orderData = response.data;
-      console.log(orderData);
-    } catch (err) {
-      console.log(err, 'error');
-    }
-  };
-
-  const fetchOrders = async () => {
-    try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/orders`);
-      const data = response.data;
-      console.log(data);
+      isOrderPayed.value = true;
+      localStorage.setItem('cart', JSON.stringify([]));
+      cartProducts.value = [];
     } catch (err) {
       console.log(err, 'error');
     }
@@ -98,6 +106,17 @@ export const useWebshopStore = defineStore('webshop', () => {
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/products`);
       const data = response.data;
       products.value = data;
+    } catch (err) {
+      console.log(err, 'error');
+    }
+  };
+
+  const fetchOrdersByCompany = async (companyId: number) => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/orders?companyId=${companyId}`);
+      const data = response.data;
+      adminOrders.value = data;
+      console.log(data);
     } catch (err) {
       console.log(err, 'error');
     }
@@ -124,7 +143,6 @@ export const useWebshopStore = defineStore('webshop', () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/search?searchtext=${text}`);
       const data: IMovieProduct[] | {} = response.data;
-      console.log(data);
       if (Array.isArray(data)) {
         // have to convert to array of numbers, productCategory is null in the API
         searchResults.value = data.map(product => product.id);
@@ -146,7 +164,7 @@ export const useWebshopStore = defineStore('webshop', () => {
   };
 
   const addProductToCart = (productId: number): void => {
-    const isProductAlreadyInCart = cartProducts.value.some(product => product.cartId === productId);
+    const isProductAlreadyInCart = cartProducts.value.some(product => product.productId === productId);
     if (isProductAlreadyInCart) return;
     const foundProduct = products.value.find(product => product.id === productId);
     if (foundProduct) {
@@ -156,21 +174,21 @@ export const useWebshopStore = defineStore('webshop', () => {
   };
 
   const removeProductFromCart = (productId: number): void => {
-    cartProducts.value = cartProducts.value.filter(product => product.cartId !== productId);
+    cartProducts.value = cartProducts.value.filter(product => product.productId !== productId);
   };
 
   const increaseCartProduct = (productId: number): void => {
-    const foundProduct = cartProducts.value.find(product => product.cartId === productId);
+    const foundProduct = cartProducts.value.find(product => product.productId === productId);
     if (foundProduct) {
-      foundProduct.quantity++;
+      foundProduct.amount++;
     }
   };
 
   const decreaseCartProduct = (productId: number): void => {
-    const foundProduct = cartProducts.value.find(product => product.cartId === productId);
+    const foundProduct = cartProducts.value.find(product => product.productId === productId);
     if (!foundProduct) return;
-    if (foundProduct.quantity > 1) {
-      foundProduct.quantity -= 1;
+    if (foundProduct.amount > 1) {
+      foundProduct.amount -= 1;
     }
   };
 
@@ -205,10 +223,13 @@ export const useWebshopStore = defineStore('webshop', () => {
     isCheckoutFormValid,
     checkutFormError,
     inputs,
+    adminOrders,
+    companyId,
+    isOrderPayed,
     fetchProducts,
     fetchCategories,
     fetchBySearch,
-    fetchOrders,
+    fetchOrdersByCompany,
     postOrders,
     setSelectedCategory,
     setProductsBySearch,
@@ -220,5 +241,6 @@ export const useWebshopStore = defineStore('webshop', () => {
     changeStateOfModal,
     changeInput,
     resetCheckoutForm,
+    toggleStateOfOrder,
   };
 });
