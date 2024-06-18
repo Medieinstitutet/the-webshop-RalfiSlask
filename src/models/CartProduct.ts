@@ -1,9 +1,9 @@
 export class CartProduct {
   constructor(
     public title: string,
-    public cartId: number,
+    public productId: number,
     public price: number,
     public imgUrl: string,
-    public quantity: number
+    public amount: number
   ) {}
 }
