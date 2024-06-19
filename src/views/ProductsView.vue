@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import Products from '@/components/Products.vue';
+import Products from '@/components/products/Products.vue';
 </script>
 
 <template>
-  <h2>These are the products</h2>
   <Products />
 </template>

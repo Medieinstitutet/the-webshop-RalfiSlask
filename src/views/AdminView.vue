@@ -2,7 +2,7 @@
 import { useWebshopStore } from '@/stores/webshopStore';
 import AdminSection from '@/components/admin/AdminSection.vue';
 import { onMounted } from 'vue';
-import LargeHeading from '@/components/shared/LargeHeading.vue';
+import LargeHeading from '@/components/shared/XLHeading.vue';
 import { storeToRefs } from 'pinia';
 
 const store = useWebshopStore();
@@ -16,9 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section
-    class="flex flex-col items-start w-full mt-10 max-w-[350px] sm:max-w-[500px] md:max-w-[800px] xl:max-w-[1100px]"
-  >
+  <section class="flex flex-col items-start pb-20 w-full mt-10 md:max-w-[800px] xl:max-w-[1100px]">
     <LargeHeading text="Orders" />
     <AdminSection />
   </section>
