@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>404 Not Found</title>
-    <script type="text/javascript">
-      // Redirect to the correct route
-      (function () {
-        var currentUrl = window.location.href;
-        var baseUrl = currentUrl.split('/404.html')[0];
-        var newUrl = baseUrl + '/#' + window.location.pathname + window.location.search;
-        window.location.replace(newUrl);
-      })();
-    </script>
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Matthias Webshop</title>
   </head>
   <body>
-    <h1>404 Not Found</h1>
-    <p>Redirecting...</p>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
