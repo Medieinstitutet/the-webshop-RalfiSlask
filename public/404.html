@@ -6,14 +6,20 @@
     <title>Page Not Found</title>
     <script>
       (() => {
+        const base = '/the-webshop-RalfiSlask';
         const path = window.location.pathname;
-        const newPath = '/the-webshop-RalfiSlask/' + path;
-        window.location.replace(newPath);
+        if (!path.startsWith(base)) {
+          const newPath = base + path;
+          window.location.replace(newPath);
+        } else {
+          document.querySelector('h1').textContent = 'Page Not Found';
+          document.querySelector('p').textContent = 'The page you are looking for does not exist.';
+        }
       })();
     </script>
   </head>
   <body>
-    <h1>Page Not Found</h1>
-    <p>Redirecting...</p>
+    <h1>Redirecting...</h1>
+    <p>Please wait...</p>
   </body>
 </html>
