@@ -11,7 +11,7 @@ console.log(adminOrders.value);
 
 <template>
   <section
-    class="mt-[80px] w-full grid grid-cols-12 gap-10 rounded-md shadow-md border border-solid border-black bg-primaryColor py-8 px-4"
+    class="mt-[80px] w-full grid grid-cols-10 sm:grid-cols-12 sm:gap-6 md:gap-10 rounded-md shadow-md border border-solid border-black bg-primaryColor py-8 px-2 sm:px-4"
   >
     <OrderHeadings />
     <div class="col-span-12 flex flex-col gap-4">

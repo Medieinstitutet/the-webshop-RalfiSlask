@@ -12,7 +12,7 @@ const { id, productId, amount } = props.orderInfo;
 <template>
   <div class="flex gap-4">
     <p>-</p>
-    <div class="flex gap-10">
+    <div class="flex sm:gap-6 md:gap-10">
       <p class="text-sm sm:text-base w-[100px]"><span class="font-medium">ID: </span>#{{ id }}</p>
       <p class="text-sm sm:text-base w-[125px] sm:w-[150px]">
         <span class="font-medium">Product ID: </span>#{{ productId }}

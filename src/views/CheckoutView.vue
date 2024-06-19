@@ -14,12 +14,12 @@ const { isOrderPayed } = storeToRefs(store);
 
 <template>
   <div
-    class="w-full min-h-[400px] max-w-[350px] sm:max-w-[450px] md:max-w-[800px] mb-[100px] mt-[100px] flex justify-center items-center bg-secondaryColor rounded-md shadow-md"
+    class="w-full min-h-[400px] sm:max-w-[600px] md:max-w-[800px] mb-[100px] mt-[100px] flex justify-center items-center bg-secondaryColor rounded-md shadow-md"
   >
     <ThankYouForOrder v-if="isOrderPayed" />
-    <div v-else class="px-2 md:px-10 py-12 flex flex-col items-center md:items-start gap-10">
+    <div v-else class="px-6 md:px-10 py-12 flex flex-col items-center md:items-start gap-10">
       <LargeHeading text="Checkout" />
-      <div class="flex flex-col gap-10">
+      <div class="flex flex-col gap-10 max-w-[350px] sm:max-w-full items-center">
         <FormCheckout />
         <PaymentMethods />
         <PayButton />

@@ -13,7 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="flex flex-col items-start pb-20 w-full mt-10 md:max-w-[800px] xl:max-w-[1100px]">
+  <section class="flex flex-col items-center sm:items-start pb-20 w-full mt-10 md:max-w-[800px] xl:max-w-[1100px]">
     <LargeHeading text="Orders" />
     <AdminSection />
   </section>
