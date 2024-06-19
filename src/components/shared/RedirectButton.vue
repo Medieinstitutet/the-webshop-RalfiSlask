@@ -15,6 +15,8 @@ defineProps<IRedirectButtonProps>();
 
 <template>
   <RouterLink to="/products"
-    ><button @click="resetCheckoutForm">{{ title }}</button></RouterLink
+    ><button class="text-lg md:text-xl hover:text-grayColor transition-colors duration-300" @click="resetCheckoutForm">
+      {{ title }}
+    </button></RouterLink
   >
 </template>
