@@ -1,39 +1,64 @@
-# Webbshop
+# Webshop - RalfiSlask
 
-Skapa en applikation som agerar webbutik åt en fiktiv kund. 
-Webbbutiken skall hämta produkter från ett api som finns på följande adress: https://medieinstitutet
-wie-products.azurewebsites.net/api/products  
+## Screenshots
 
-Produkterna skall presenteras på ett trevligt sätt genom att använda de tekniker som ni lärt er i 
-kursen.  
+![Skärmbild 2024-06-19 164251](https://github.com/Medieinstitutet/the-webshop-RalfiSlask/assets/112242026/658decff-b41e-4bb7-b87d-eb64b479c77a)
 
-En användare skall kunna lägga saker i en varukorg. Fundera över hur det skall fungera med 
-varukorgen vad det gäller att lägga till och ta bort varor. Hur skall dessa varor lagras för att kunna 
-presenteras på ett bra sätt? Var någonstans kan dessa varor lagras för att komma åt dem snabbt?  
+## Tech Stack
 
-När användaren är klar skall användaren komma till en checka-ut-sida där en order skickas till api:t 
-nedan tillsammans med användarens uppgifter. Fundera över hur denna data lagras i databsen och 
-hur ni behöver strukturera upp ert formulär efter det.  
+- HTML5
+- Vue
+- Typescript
+- Sass
+- Tailwind
 
-För att skapa en order behöver följande adress användas: https://medieinstitutet-wie-products.azurewebsites.net/api/orders
+### Build Tools
 
-För att göra sidan lite mer levande och kunna visa mer dynamisk data finns det ytterligare några 
-api:er som kan användas:  
+- Vite
 
-Kategorier: https://medieinstitutet-wie-products.azurewebsites.net/api/categories  
-Sök: https://medieinstitutet-wie-products.azurewebsites.net/api/search?searchtext= 
+### Relevant Dependencies
 
-## Betygskrav G: 
+- lodash
+- pinia
+- vue-router
 
-- En fungerande webbshop 
-- Användare kan lägga produkter i varukorgen 
-- Användaren kan skapa en order med sina produkter 
-- Ett admin-gränssnitt finns för att kunna se ordrar.  
+## Formatting
 
-## Betygskrav VG: 
+This projects uses code standards by applying the eslint and prettier tools:
 
-- Alla krav för G 
-- Användaren kan ändra antalet av respektive produkt i varukorgen 
-- Använda routing för de olika sidorna (hem, produkter, betala och admin) 
-- Implementera kategorier med filtrering av produkter 
-- Implementera sök och sökresultat
+- **Eslint**: identifies bugs and patterns to make the code more consistent.
+- **Prettier**: code formatter for making the code more readable and consistent.
+
+## How To Run
+
+Step 1: Clone and download repo.
+Step 2: Install node_modules using npm i.
+Step 3: Use the Mediainstitutet API in the env file, there is an example.env file in root.
+Step 4: Run script for vite (npm run dev) to launch the application.
+
+## Status
+
+This project is marked as "In Progress"
+
+## App Description
+
+This is an excercise given to me at Mediainstitutet for showing off what i have learned off Vue. 
+
+## Features
+
+- **Routes**: Home, Products, Checkout and Admin pages are available.
+- **Filter**: Can filter products by categories and using the search function.
+- **Cart**: Products can be added to a cart Sidebar where the user either can remove or increase/decrease the number of them.
+- **Checkout Form**: Checkout form where user can fill in information and also pick payment method.
+- **Storing**: Products are stored in local storage.
+- **View orders**: Can see all the orders made for the fictive user.
+
+## What I have learned
+
+- Had not used pinia before only state managment systems like vuex and redux.
+- New ways of deploying to github pages.
+- More familiarity with some parts of Vue that needed to be repeated. 
+
+## Authors
+
+- [RalfiSlask](https://github.com/RalfiSlask)
