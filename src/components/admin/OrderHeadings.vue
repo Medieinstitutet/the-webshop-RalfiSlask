@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import OrderHeading from '../shared/OrderHeading.vue';
+import OrderHeading from './OrderHeading.vue';
 import { orderHeadings } from '@/models/admin';
 </script>
 
