@@ -67,3 +67,11 @@ export interface IPositiveInfo {
   alt: string;
   iconSize: 'small' | 'medium';
 }
+
+export interface IInput {
+  label: string;
+  placeholder: string;
+  id: string;
+  type: string;
+  required?: boolean;
+}
