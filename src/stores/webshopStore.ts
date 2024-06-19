@@ -67,7 +67,6 @@ export const useWebshopStore = defineStore('webshop', () => {
 
   const visibleProducts = computed(() => {
     let filteredProducts = products.value;
-    console.log(searchText.value);
     if (searchText.value.trim() !== '') {
       filteredProducts = filteredProducts.filter(product => searchResults.value.includes(product.id));
     }
@@ -91,8 +90,6 @@ export const useWebshopStore = defineStore('webshop', () => {
         totalPrice: totalPrice.value,
         orderRows: orderProducts.value, // TEST
       });
-
-      console.log(response);
 
       isOrderPayed.value = true;
       localStorage.setItem('cart', JSON.stringify([]));
