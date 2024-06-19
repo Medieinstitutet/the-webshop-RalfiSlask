@@ -1,5 +1,5 @@
 .operator-button {
-  @apply rounded-full bg-slate-400 w-[40px] h-[40px] text-2xl flex justify-center items-center;
+  @apply bg-blueColor rounded-md text-white w-[50px] h-[35px] text-3xl flex justify-center items-center;
 }
 
 .primary-button {
@@ -10,12 +10,16 @@
   @apply bg-blueColor w-full transition-colors h-[70px] duration-300 hover:bg-blueHover text-white flex justify-center items-center py-3 px-14 gap-2 text-xl uppercase leading-[32px] tracking-[-0.4px] font-medium;
 }
 
+.submit-button {
+  @apply bg-blueColor text-white h-full absolute right-0 w-[150px];
+}
+
 .category {
   @apply rounded-[8px] h-[40px] w-[120px] text-white;
 }
 
 .search-input {
-  @apply border-2 border-solid border-blueColor px-2 h-[50px] rounded-sm w-[300px];
+  @apply px-2 h-[50px] w-[300px];
 }
 
 .input {
