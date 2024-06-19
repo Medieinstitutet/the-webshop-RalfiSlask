@@ -3,6 +3,7 @@ import { ref, computed, watch } from 'vue';
 import type { IMovieProduct, ICategory, IPaymentMethods, IModals, IInputs, IOrder } from '@/utils/types/types';
 import { CartProduct } from '@/models/CartProduct';
 import { textOnlyRegx } from '@/utils/regEx/regEx';
+import { emptyInputs } from '@/data/formInputs';
 import lodash from 'lodash';
 import axios from 'axios';
 
@@ -210,15 +211,7 @@ export const useWebshopStore = defineStore('webshop', () => {
   };
 
   const resetCheckoutForm = () => {
-    inputs.value = {
-      name: '',
-      email: '',
-      phone: '',
-      address: '',
-      city: '',
-      zip: '',
-      country: '',
-    };
+    inputs.value = emptyInputs;
     paymentMethods.value = { invoice: true, paypal: false };
   };
 
