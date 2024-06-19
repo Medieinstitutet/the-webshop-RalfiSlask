@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import FormSection from './FormSection.vue';
 import { formInputs } from '@/data/formInputs';
 </script>
