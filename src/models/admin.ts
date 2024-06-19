@@ -1,1 +1,1 @@
-export const orderHeadings = ['Order ID', 'Date', 'Customer Name', 'Amount', 'Payment Method'];
+export const orderHeadings = ['Order ID', 'Date', 'Name', 'Amount', 'Payment'];
