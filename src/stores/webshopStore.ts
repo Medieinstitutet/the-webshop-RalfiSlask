@@ -84,7 +84,7 @@ export const useWebshopStore = defineStore('webshop', () => {
   const postOrders = async () => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/orders`, {
-        companyId: 34567,
+        companyId: companyId.value,
         createdBy: inputs.value.name,
         created: new Date().toISOString(),
         paymentMethod: paymentMethods.value.invoice ? 'invoice' : 'paypal',
