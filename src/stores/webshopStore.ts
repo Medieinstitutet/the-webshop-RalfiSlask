@@ -3,7 +3,6 @@ import { ref, computed, watch } from 'vue';
 import type { IMovieProduct, ICategory, IPaymentMethods, IModals, IInputs, IOrder } from '@/utils/types/types';
 import { CartProduct } from '@/models/CartProduct';
 import { textOnlyRegx } from '@/utils/regEx/regEx';
-import { emptyInputs } from '@/models/formInputs';
 import lodash from 'lodash';
 import axios from 'axios';
 
@@ -22,7 +21,15 @@ export const useWebshopStore = defineStore('webshop', () => {
   const searchResults = ref<number[]>([]);
   const paymentMethods = ref<IPaymentMethods>({ invoice: true, paypal: false });
   const modalStates = ref<IModals>({ login: false, create: false, cart: false });
-  const inputs = ref<IInputs>(emptyInputs);
+  const inputs = ref<IInputs>({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    zip: '',
+    country: '',
+  });
   const checkutFormError = ref<boolean>(false);
   const adminOrders = ref<IOrder[]>([]);
   const companyId = ref<number>(56789);
@@ -203,7 +210,15 @@ export const useWebshopStore = defineStore('webshop', () => {
   };
 
   const resetCheckoutForm = () => {
-    inputs.value = emptyInputs;
+    inputs.value = {
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+      city: '',
+      zip: '',
+      country: '',
+    };
     paymentMethods.value = { invoice: true, paypal: false };
   };
 
