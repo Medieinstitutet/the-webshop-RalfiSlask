@@ -19,7 +19,7 @@ onMounted(() => {
   <section class="max-w-[1400px] flex flex-col items-center gap-14 py-20 pb-[400px]">
     <h2 class="text-3xl">Products</h2>
     <div class="flex flex-col gap-6">
-      <div class="w-full flex flex-col sm:flex-row flex-wrap gap-4 items-center justify-between px-4">
+      <div class="w-full flex flex-col sm:flex-row flex-wrap gap-4 items-center justify-between">
         <Categories />
       </div>
       <SearchInput />
