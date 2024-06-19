@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CartForm from '@/components/checkout/CartForm.vue';
+import FormCheckout from '@/components/checkout/FormCheckout.vue';
 import PaymentMethods from '@/components/checkout/PaymentMethods.vue';
 import PayButton from '@/components/checkout/PayButton.vue';
 import LargeHeading from '@/components/shared/XLHeading.vue';
@@ -20,7 +20,7 @@ const { isOrderPayed } = storeToRefs(store);
     <div v-else class="px-2 md:px-10 py-12 flex flex-col items-center md:items-start gap-10">
       <LargeHeading text="Checkout" />
       <div class="flex flex-col gap-10">
-        <CartForm />
+        <FormCheckout />
         <PaymentMethods />
         <PayButton />
       </div>
