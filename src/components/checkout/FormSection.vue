@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MediumHeading from '../shared/MediumHeading.vue';
 import FormInput from './FormInput.vue';
+import type { IInput } from '@/utils/types/types';
 
 interface IFormSectionProps {
   formInfo: {
@@ -8,14 +9,6 @@ interface IFormSectionProps {
     heading: string;
     inputs: IInput[];
   };
-}
-
-interface IInput {
-  label: string;
-  placeholder: string;
-  id: string;
-  type: string;
-  required: boolean;
 }
 
 defineProps<IFormSectionProps>();
