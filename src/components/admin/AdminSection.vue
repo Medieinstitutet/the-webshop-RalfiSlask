@@ -10,7 +10,9 @@ console.log(adminOrders.value);
 </script>
 
 <template>
-  <section class="mt-[80px] w-full grid grid-cols-12 gap-10">
+  <section
+    class="mt-[80px] w-full grid grid-cols-12 gap-10 rounded-md shadow-md border border-solid border-black bg-primaryColor py-8 px-4"
+  >
     <OrderHeadings />
     <div class="col-span-12 flex flex-col gap-4">
       <Order v-for="order in adminOrders" :key="order.id" :orderInfo="order" />

@@ -11,5 +11,7 @@ defineEmits<{
 </script>
 
 <template>
-  <button @click="$emit('remove-product', productId)">Remove</button>
+  <button @click="$emit('remove-product', productId)">
+    <img src="../../assets/icons/remove.svg" alt="trashbin icon" width="32" height="32" loading="lazy" />
+  </button>
 </template>

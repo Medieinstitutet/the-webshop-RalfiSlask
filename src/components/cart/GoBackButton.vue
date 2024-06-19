@@ -6,5 +6,7 @@ const { changeStateOfModal } = store;
 </script>
 
 <template>
-  <button @click="changeStateOfModal('cart', false)">Go Back</button>
+  <button @click="changeStateOfModal('cart', false)">
+    <img src="../../assets/icons/close.svg" alt="close icon" width="32" height="32" />
+  </button>
 </template>

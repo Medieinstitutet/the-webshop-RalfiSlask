@@ -8,7 +8,7 @@ const { changeStateOfModal } = store;
 </script>
 
 <template>
-  <RouterLink to="/checkout">
-    <button @click="changeStateOfModal('cart', false)" class="primary-button">Checkout</button>
+  <RouterLink to="/checkout" class="w-full">
+    <button @click="changeStateOfModal('cart', false)" class="secondary-button">Checkout</button>
   </RouterLink>
 </template>

@@ -5,8 +5,8 @@ import Payment from './Payment.vue';
 
 <template>
   <div class="flex justify-between w-full">
-    <MediumHeading text="payment methods" />
-    <div class="flex flex-col items-end gap-4 w-[50%]">
+    <MediumHeading text="Payment Methods" />
+    <div class="flex flex-col items-end gap-4 w-[325px]">
       <Payment paymentType="invoice" />
       <Payment paymentType="paypal" />
     </div>

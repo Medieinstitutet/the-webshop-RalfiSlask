@@ -17,22 +17,24 @@ defineProps<ICartProductProps>();
 </script>
 
 <template>
-  <div class="flex justify-between items-center px-2 w-full">
-    <div class="flex items-center gap-4">
+  <div class="flex justify-between items-center w-full">
+    <div class="flex items-center gap-4 w-[275px]">
       <div class="flex gap-2">
         <div class="w-[100px]">
           <img :src="cartProductInfo.imgUrl" :alt="cartProductInfo.title" width="100px" height="100px" loading="lazy" />
         </div>
+      </div>
+      <div class="flex flex-col items-start gap-4">
+        <div>
+          <p class="font-medium">{{ cartProductInfo.title }}</p>
+          <p>${{ cartProductInfo.price }}</p>
+        </div>
         <RemoveCartProductButton @remove-product="removeProductFromCart" :productId="cartProductInfo.productId" />
       </div>
-      <div>
-        <p>{{ cartProductInfo.title }}</p>
-        <p>{{ cartProductInfo.price }}</p>
-      </div>
     </div>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center justify-between w-[150px]">
       <DecreaseProductButton :id="cartProductInfo.productId" />
-      <p>{{ cartProductInfo.amount }}</p>
+      <p class="text-xl">{{ cartProductInfo.amount }}</p>
       <IncreaseProductButton :id="cartProductInfo.productId" />
     </div>
   </div>

@@ -12,9 +12,9 @@ const { modalStates, hasActiveModal } = storeToRefs(store);
 </script>
 
 <template>
-  <div class="min-h-screen relative pb-[400px]">
+  <div class="min-h-screen relative pb-[350px]">
     <Header />
-    <main class="w-full flex flex-col items-center">
+    <main class="w-full flex flex-col items-center h-full">
       <RouterView />
     </main>
 

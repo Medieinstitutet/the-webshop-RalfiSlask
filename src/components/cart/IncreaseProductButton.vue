@@ -13,6 +13,6 @@ defineProps<IButtonProps>();
 
 <template>
   <button @click="increaseCartProduct(id)" class="operator-button">
-    <span class="mb-1">+</span>
+    <span>+</span>
   </button>
 </template>
