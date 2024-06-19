@@ -3,15 +3,12 @@ import { useWebshopStore } from '@/stores/webshopStore';
 import AdminSection from '@/components/admin/AdminSection.vue';
 import { onMounted } from 'vue';
 import LargeHeading from '@/components/shared/XLHeading.vue';
-import { storeToRefs } from 'pinia';
 
 const store = useWebshopStore();
-
-const { companyId } = storeToRefs(store);
 const { fetchOrdersByCompany } = store;
 
 onMounted(() => {
-  fetchOrdersByCompany(companyId.value);
+  fetchOrdersByCompany();
 });
 </script>
 

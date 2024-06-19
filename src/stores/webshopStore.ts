@@ -92,6 +92,8 @@ export const useWebshopStore = defineStore('webshop', () => {
         orderRows: orderProducts.value, // TEST
       });
 
+      console.log(response);
+
       isOrderPayed.value = true;
       localStorage.setItem('cart', JSON.stringify([]));
       cartProducts.value = [];
@@ -110,12 +112,11 @@ export const useWebshopStore = defineStore('webshop', () => {
     }
   };
 
-  const fetchOrdersByCompany = async (companyId: number) => {
+  const fetchOrdersByCompany = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/orders?companyId=${companyId}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/orders?companyId=${companyId.value}`);
       const data = response.data;
       adminOrders.value = data;
-      console.log(data);
     } catch (err) {
       console.log(err, 'error');
     }
