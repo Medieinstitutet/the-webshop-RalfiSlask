@@ -13,7 +13,7 @@ interface INumberProps {
     label: string;
     id: string;
     type: string;
-    required: boolean;
+    required?: boolean;
   };
 }
 
