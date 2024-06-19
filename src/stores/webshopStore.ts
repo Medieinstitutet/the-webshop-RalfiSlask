@@ -25,7 +25,7 @@ export const useWebshopStore = defineStore('webshop', () => {
   const inputs = ref<IInputs>(emptyInputs);
   const checkutFormError = ref<boolean>(false);
   const adminOrders = ref<IOrder[]>([]);
-  const companyId = ref<number>(34567);
+  const companyId = ref<number>(56789);
   const isOrderPayed = ref<boolean>(false);
 
   watch(
@@ -38,7 +38,6 @@ export const useWebshopStore = defineStore('webshop', () => {
 
   const toggleStateOfOrder = () => {
     isOrderPayed.value = !isOrderPayed.value;
-    console.log(isOrderPayed.value);
   };
 
   const changeInput = (e: Event, key: keyof IInputs) => {
