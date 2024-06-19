@@ -5,7 +5,7 @@ import XLHeading from '../shared/XLHeading.vue';
 
 <template>
   <div
-    class="flex flex-col gap-4 px-6 py-6 bg-secondaryColor rounded-lg absolute right-1/2 md:right-[25%] md:bottom-[15%] translate-x-1/2"
+    class="flex flex-col gap-4 px-6 py-6 bg-secondaryColor shadow-lg rounded-md absolute right-1/2 md:right-[25%] md:bottom-[15%] translate-x-1/2"
   >
     <div class="w-[300px] flex flex-col gap-4">
       <XLHeading text="Cinema Magic, Delivered to you." fontStyle="uppercase" />
