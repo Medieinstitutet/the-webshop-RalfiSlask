@@ -24,6 +24,11 @@ const router = createRouter({
       name: 'admin',
       component: () => import('../views/AdminView.vue'),
     },
+    {
+      path: '/:cathAll(.*)',
+      name: 'not found',
+      component: HomeView,
+    },
   ],
 });
 
