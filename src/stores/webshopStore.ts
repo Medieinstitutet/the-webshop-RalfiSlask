@@ -22,15 +22,7 @@ export const useWebshopStore = defineStore('webshop', () => {
   const searchResults = ref<number[]>([]);
   const paymentMethods = ref<IPaymentMethods>({ invoice: true, paypal: false });
   const modalStates = ref<IModals>({ login: false, create: false, cart: false });
-  const inputs = ref<IInputs>({
-    name: '',
-    email: '',
-    phone: '',
-    address: '',
-    city: '',
-    zip: '',
-    country: '',
-  });
+  const inputs = ref<IInputs>(emptyInputs);
   const checkutFormError = ref<boolean>(false);
   const adminOrders = ref<IOrder[]>([]);
   const companyId = ref<number>(56789);
