@@ -14,12 +14,16 @@ const handleInputOnSearch = (e: Event) => {
 </script>
 
 <template>
-  <input
-    :value="searchText"
-    @input="handleInputOnSearch"
-    class="search-input"
-    type="text"
-    id="search"
-    placeholder="Search for a product..."
-  />
+  <div class="flex items-center border-2 border-solid border-blueColor w-[350px] justify-between pr-2">
+    <input
+      style="outline-style: none"
+      :value="searchText"
+      @input="handleInputOnSearch"
+      class="search-input"
+      type="text"
+      id="search"
+      placeholder="Search for a product..."
+    />
+    <img src="../../assets/icons/search.svg" alt="search icon" height="32" width="32" loading="lazy" />
+  </div>
 </template>
